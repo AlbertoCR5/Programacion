@@ -9,10 +9,10 @@ public class Habitacion {
 	public static final String DOBLE = "DOBLE";
 	public static final String TRIPLE = "TRIPLE";
 	
-	public Habitacion(int numero, String tipo, boolean ocupada) throws HabitacionHotelException {
+	public Habitacion(int numero, String tipo) throws HabitacionHotelException {
 
 		if (!(tipo.equals(SIMPLE) || tipo.equals(DOBLE) || tipo.equals(TRIPLE))) {
-			throw new HabitacionHotelException("Error, tipo de habitacion no disponible");
+			throw new HabitacionHotelException("Error, tipo de habitacion no disponible" + tipo);
 		}
 		if (numero < 1) {
 			throw new HabitacionHotelException ("Error, numero de habitacion no disponible" + numero);
@@ -26,9 +26,12 @@ public class Habitacion {
 		return numero;
 	}
 
-
 	public String getTipo() {
 		return tipo;
+	}
+
+	public static boolean getTipoHabitacion(String tipo) {
+		return tipo.equals(SIMPLE) || tipo.equals(DOBLE) ||  tipo.equals(TRIPLE);
 	}
 
 	public boolean isOcupada() {

@@ -7,18 +7,17 @@ public class Hotel {
 	private String nombre;	
 	private Habitacion[] habitaciones;
 	private int estrellas;
-//	private int habitacionesSimples;
-//	private int habitacionesDobles;
-//	private int habitacionesTriples;
-//	
-	public Hotel(String nombre, int estrellas, Habitacion[] habitaciones, int simples, int dobles, int triples) throws HabitacionHotelException {
 
-		if (simples < 0 || dobles < 0 || triples < 0) {
-			throw new HabitacionHotelException ("Error, cantidad de  habitaciones ha de ser positivo");
-		}		
-		
+	
+	public Hotel(String nombre, int estrellas, int simples, int dobles, int triples) throws HabitacionHotelException {
+
 		this.nombre = nombre;
 		setEstrellas(estrellas);
+		
+		if (simples < 0 || dobles < 0 || triples < 0) {
+			throw new HabitacionHotelException ("Error, cantidad de habitaciones ha de ser positivo");
+		}		
+		
 		habitaciones = new Habitacion[simples + dobles + triples];
 		crearHabitaciones(0, simples, Habitacion.SIMPLE);
 		crearHabitaciones(simples, dobles, Habitacion.DOBLE);
@@ -26,10 +25,10 @@ public class Hotel {
 		
 	}
 
-	private void crearHabitaciones(int posicionInicial, int cantidad, String tipo) {
+	private void crearHabitaciones(int posicionInicial, int cantidad, String tipo) throws HabitacionHotelException{
 
-		for (int i = posicionInicial; i < habitaciones.length; cantidad++) {
-			
+		for (int i = posicionInicial; i < posicionInicial; cantidad++) {
+			habitaciones[i] = new Habitacion (i +1, tipo);
 		}
 	}
 
@@ -54,7 +53,46 @@ public class Hotel {
 		this.estrellas = estrellas;
 	}
 	
+	public int checkIn(String tipoHabitacionSolicitada) throws HabitacionHotelException {
+		
+		boolean checkInOk = false;
+		int habitacionAsignada= 0;
+		
+		if (!Habitacion.getTipoHabitacion(tipoHabitacionSolicitada)) {
+			throw new HabitacionHotelException("Tipo de habitacion incorrecto " + tipoHabitacionSolicitada);
+		}
+		
+		for (int i = 0; i < habitaciones.length && !checkInOk; i++) {
+			if (habitaciones[i].getTipo().equals(tipoHabitacionSolicitada) && !habitaciones[i].isOcupada()){
+				habitaciones[i].setOcupada(true); //queda ocupada
+				habitacionAsignada = habitaciones[i].getNumero();
+				checkInOk = true;
+			}
+			
+		}
+		
+		if (!checkInOk) {
+			throw new HabitacionHotelException("No quedan habitaciones del tipo " + tipoHabitacionSolicitada);
+		}
+		
+		return habitacionAsignada;
+		
+		
+	}
 	
-	
+	public void checkOut (int habitacion) throws HabitacionHotelException {
+		
+		int numeroInterno = habitacion -1;
+		
+		if (numeroInterno < 0 || numeroInterno >= habitaciones.length) {
+			throw new HabitacionHotelException("Numero de habitacion incorrecto " + habitacion);
+		}
+		if (!habitaciones[numeroInterno].isOcupada()) {
+			throw new HabitacionHotelException("Error, no se puede realizar checkout de la habitacion " + numeroInterno);
+		}
+		
+		habitaciones[numeroInterno].setOcupada(false); //queda libre
+		
+	}
 
 }
