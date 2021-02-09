@@ -1,4 +1,4 @@
-package Ejercicio4;
+package Jarra;
 
 import java.util.Scanner;
 

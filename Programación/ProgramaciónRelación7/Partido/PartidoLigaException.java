@@ -1,4 +1,4 @@
-package Ejercicio5;
+package Partido;
 
 @SuppressWarnings("serial")
 public class PartidoLigaException extends Exception {

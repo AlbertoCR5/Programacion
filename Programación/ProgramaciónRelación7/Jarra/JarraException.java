@@ -1,4 +1,4 @@
-package Ejercicio4;
+package Jarra;
 
 @SuppressWarnings("serial")
 public class JarraException extends Exception{

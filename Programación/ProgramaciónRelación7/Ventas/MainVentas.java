@@ -1,5 +1,5 @@
 
-package Ejercicio3;
+package Ventas;
 
 import java.util.Scanner;
 

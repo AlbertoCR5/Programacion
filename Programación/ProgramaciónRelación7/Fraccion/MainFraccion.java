@@ -25,8 +25,8 @@ public class MainFraccion {
 			System.out.println(e.getMessage());
 		}
 		
-		fraccion1.simplificar();
-		fraccion2.simplificar();
+	//	fraccion1.simplificar();
+		//fraccion2.simplificar();
 		System.out.println("La fraccion 1 simpleficando es " + fraccion1 +  " y el 2 es " + fraccion2);
 
 	}

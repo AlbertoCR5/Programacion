@@ -1,4 +1,4 @@
-package Ejercicio3;
+package Ventas;
 
 public class Producto {
 

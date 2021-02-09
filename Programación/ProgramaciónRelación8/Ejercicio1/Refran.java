@@ -42,7 +42,7 @@ public class Refran implements Comparable<Refran> {
 		return Integer.compare(otro.popularidad, this.popularidad);
 	}
 
-	public boolean equlas(Refran otroRefran) {
+	public boolean equals(Refran otroRefran) {
 
 		return this.getTexto().equals(otroRefran.getTexto());
 

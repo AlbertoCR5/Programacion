@@ -1,4 +1,4 @@
-package Ejercicio2;
+package PuntoLinea;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package Ejercicio5;
+package Partido;
 
 import java.util.Scanner;
 
