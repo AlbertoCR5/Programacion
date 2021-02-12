@@ -6,10 +6,13 @@ public class Empleado {
 	public static final String DESARROLLO = "DESARROLLO";
 	public static final String SISTEMAS = "SISTEMAS";
 	public static final String BD = "BASE DE DATOS";
+	public static final int SUELDO_MAXIMO_DIRECTIVO = 3500;
+	public static final int SUELDO_MAXIMO_INFORMATICO = 3000;
+	public static final int SUELDO_MAXIMO_OPERARIO = 1200;
 	
 	private String dni;
 	private String nombre;
-	private int sueldo;
+	protected int sueldo;
 	
 	
 	public Empleado(String dni, String nombre, int sueldo) throws EmpleadoException {

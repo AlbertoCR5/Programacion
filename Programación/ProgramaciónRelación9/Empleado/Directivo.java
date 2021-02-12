@@ -1,24 +1,47 @@
 package Empleado;
 
 public class Directivo extends Empleado{
-
-public static final int SUELDO_MAXIMO = 3500;
 	
 	private String departamento;
 
 	public Directivo(String dni, String nombre, int sueldo, String departamento) throws EmpleadoException {
 		
 		super(dni, nombre, sueldo);
+		setDepartamento(departamento);
+
+	}
+	
+	
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) throws EmpleadoException {
 		
 		if(!(departamento.contains(BD) || departamento.contains(DESARROLLO) || departamento.contains(SISTEMAS))){
 			throw  new EmpleadoException("Error, especialidad incorrecta" + departamento);
 		}
-		if(sueldo > SUELDO_MAXIMO || sueldo < 0) {
+		
+		this.departamento = departamento;
+	}
+
+	
+	@Override
+	public int getSueldo() {
+		return super.getSueldo();
+	}
+
+
+	@Override
+	public void setSueldo(int sueldo) throws EmpleadoException {
+		
+		if(sueldo > SUELDO_MAXIMO_DIRECTIVO || sueldo < SUELDO_MINIMO) {
 			throw  new EmpleadoException("Error, sueldo incorrecto" + sueldo);
 		}
 	
-		this.departamento = departamento;
+		super.setSueldo(sueldo);
 	}
+
 
 	@Override
 	public String toString() {

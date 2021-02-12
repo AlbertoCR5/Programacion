@@ -1,28 +1,43 @@
+
 package Empleado;
 
 public class Operario extends Empleado{
 
-public static final int SUELDO_MAXIMO = 1200;
-	
 	private int numeroNave;
 
 	public Operario(String dni, String nombre, int sueldo, int numeroNave) throws EmpleadoException {
 		
 		super(dni, nombre, sueldo);
-		
-		if(sueldo > SUELDO_MAXIMO || sueldo < 0) {
-			throw  new EmpleadoException("Error, sueldo incorrecto" + sueldo);
-		}
-		if (numeroNave < 1 || numeroNave > 5) {
-			throw  new EmpleadoException("Error, nave incorrecta" + numeroNave);
-		}
-		
-		this.numeroNave = numeroNave;
+		setNumeroNave(numeroNave);
 		
 	}
 
 	public int getNumeroNave() {
 		return numeroNave;
+	}
+
+	public void setNumeroNave(int numeroNave) throws EmpleadoException {
+		
+		if (numeroNave < 1 || numeroNave > 5) {
+			throw  new EmpleadoException("Error, nave incorrecta" + numeroNave);
+		}
+		
+		this.numeroNave = numeroNave;
+	}
+	
+	@Override
+	public int getSueldo() {
+
+		return super.getSueldo();
+	}
+
+	@Override
+	public void setSueldo(int sueldo) throws EmpleadoException {
+
+		if(sueldo > SUELDO_MAXIMO_OPERARIO || sueldo < SUELDO_MINIMO) {
+			throw  new EmpleadoException("Error, sueldo incorrecto" + sueldo);
+		}
+		super.setSueldo(sueldo);
 	}
 
 	@Override

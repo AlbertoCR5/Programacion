@@ -2,14 +2,13 @@ package Banco;
 
 /**
  Realizar un programa que permita gestionar el saldo de una cuenta corriente. Una
- vez introducido el saldo inicial, se mostrar√° un men√∫ que permitir√° efectuar las
+ vez introducido el saldo inicial, se mostrar· un men˙ que permitir· efectuar las
  siguientes operaciones:
-	1. Hacer un reintegro, se pedir√° la cantidad a retirar.
-	2. Hacer un ingreso, se pedir√° la cantidad a ingresar.
-	3. Consultar el saldo y el n√∫mero de reintegros e ingresos realizados.
+	1. Hacer un reintegro, se pedir· la cantidad a retirar.
+	2. Hacer un ingreso, se pedir· la cantidad a ingresar.
+	3. Consultar el saldo y el n˙mero de reintegros e ingresos realizados.
 	4. Finalizar las operaciones. Debe confirmar si realmente desea salir e
        informar del saldo al final de todas las operaciones.
-
  Debe realizarse una clase Cuenta y la clase Principal.
 */
 public class Cuenta {
@@ -44,7 +43,7 @@ public class Cuenta {
 	
 	
 
-	// M√©todos gets
+	// MÈtodos gets
 	
 	public String getTitular() {
 		return titular;
@@ -65,7 +64,7 @@ public class Cuenta {
 	}
 
 	/**
-	 * M√©todo que realiza un reintegro en la cuenta.
+	 * MÈtodo que realiza un reintegro en la cuenta.
 	 * @param reintegro
 	 * @throws CuentaException 
 	 */
@@ -82,7 +81,7 @@ public class Cuenta {
 	}
 
 	/**
-	 * M√©todo que realiza un ingreso en la cuenta
+	 * MÈtodo que realiza un ingreso en la cuenta
 	 * @param ingreso
 	 * @throws CuentaException 
 	 */
@@ -95,7 +94,7 @@ public class Cuenta {
 	}
 	
 	/**
-	 * M√©todo que muestra el saldo y el n√∫mero de ingresos y reintegros.
+	 * MÈtodo que muestra el saldo y el n˙mero de ingresos y reintegros.
 	 */
 	public String toString() {
 		return "Saldo " + saldo +  " Titular :" + titular;
