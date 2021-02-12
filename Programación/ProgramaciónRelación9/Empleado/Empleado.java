@@ -1,7 +1,11 @@
 package Empleado;
 
 public class Empleado {
-	public static final int SUELDO_MINIMO=800;
+	
+	public static final int SUELDO_MINIMO = 800;
+	public static final String DESARROLLO = "DESARROLLO";
+	public static final String SISTEMAS = "SISTEMAS";
+	public static final String BD = "BASE DE DATOS";
 	
 	private String dni;
 	private String nombre;
@@ -36,7 +40,7 @@ public class Empleado {
 	}
 	@Override
 	public String toString() {
-		return "Empleado [dni=" + dni + ", nombre=" + nombre + ", sueldo=" + sueldo + "]";
+		return "Empleado " + nombre + " con DNI: " + dni + ", tiene un sueldo de " + sueldo + "€";
 	}
 	
 	

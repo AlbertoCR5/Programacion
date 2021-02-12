@@ -17,6 +17,8 @@ public static final int SUELDO_MAXIMO = 1200;
 			throw  new EmpleadoException("Error, nave incorrecta" + numeroNave);
 		}
 		
+		this.numeroNave = numeroNave;
+		
 	}
 
 	public int getNumeroNave() {
@@ -25,7 +27,7 @@ public static final int SUELDO_MAXIMO = 1200;
 
 	@Override
 	public String toString() {
-		return super.toString() + "Operario [numeroNave=" + numeroNave + "]";
+		return super.toString() + ", es operario y trabaja en la nave numero " + numeroNave + ".";
 	}
 	
 }
