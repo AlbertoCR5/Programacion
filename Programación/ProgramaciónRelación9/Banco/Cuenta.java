@@ -40,8 +40,6 @@ public class Cuenta {
 		this.titular=titular;
 		
 	}
-	
-	
 
 	// Métodos gets
 	
