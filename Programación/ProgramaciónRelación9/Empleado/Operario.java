@@ -7,7 +7,8 @@ public class Operario extends Empleado{
 
 	public Operario(String dni, String nombre, int sueldo, int numeroNave) throws EmpleadoException {
 		
-		super(dni, nombre, sueldo);
+		super(dni, nombre, sueldo); //Llama al constructor
+		// setSueldo(sueldo);
 		setNumeroNave(numeroNave);
 		
 	}
@@ -24,18 +25,13 @@ public class Operario extends Empleado{
 		
 		this.numeroNave = numeroNave;
 	}
-	
-	@Override
-	public int getSueldo() {
 
-		return super.getSueldo();
-	}
-
+	//Primero controla el sueldo del operario, luego el sueldo minimo general
 	@Override
 	public void setSueldo(int sueldo) throws EmpleadoException {
 
 		if(sueldo > SUELDO_MAXIMO_OPERARIO || sueldo < SUELDO_MINIMO) {
-			throw  new EmpleadoException("Error, sueldo incorrecto" + sueldo);
+			throw  new EmpleadoException("Error, sueldo incorrecto " + sueldo);
 		}
 		super.setSueldo(sueldo);
 	}

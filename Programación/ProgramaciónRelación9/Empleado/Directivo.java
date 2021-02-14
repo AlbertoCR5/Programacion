@@ -2,33 +2,13 @@ package Empleado;
 
 public class Directivo extends Empleado{
 	
-	private String departamento;
+	private TipoEspecialidad especialidad;
 
-	public Directivo(String dni, String nombre, int sueldo, String departamento) throws EmpleadoException {
+	public Directivo(String dni, String nombre, int sueldo, TipoEspecialidad departamento) throws EmpleadoException {
 		
 		super(dni, nombre, sueldo);
-		setDepartamento(departamento);
+		especialidad = departamento;
 
-	}
-	
-	
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) throws EmpleadoException {
-		
-		if(!(departamento.contains(BD) || departamento.contains(DESARROLLO) || departamento.contains(SISTEMAS))){
-			throw  new EmpleadoException("Error, especialidad incorrecta" + departamento);
-		}
-		
-		this.departamento = departamento;
-	}
-
-	
-	@Override
-	public int getSueldo() {
-		return super.getSueldo();
 	}
 
 
@@ -45,7 +25,7 @@ public class Directivo extends Empleado{
 
 	@Override
 	public String toString() {
-		return super.toString() + ", y es el directivo del departamento de " + departamento + ".";
+		return super.toString() + ", y es el directivo del departamento de " + especialidad + ".";
 	}
 
 

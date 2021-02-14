@@ -12,7 +12,7 @@ public class Empleado {
 	
 	private String dni;
 	private String nombre;
-	protected int sueldo;
+	private int sueldo;
 	
 	
 	public Empleado(String dni, String nombre, int sueldo) throws EmpleadoException {
@@ -37,10 +37,13 @@ public class Empleado {
 		return sueldo;
 	}
 	public void setSueldo(int sueldo) throws EmpleadoException {
+		
 		if (sueldo < SUELDO_MINIMO)
 			throw new EmpleadoException(" Sueldo incorrecto");
+		
 		this.sueldo = sueldo;
 	}
+	
 	@Override
 	public String toString() {
 		return "Empleado " + nombre + " con DNI: " + dni + ", tiene un sueldo de " + sueldo + "€";
