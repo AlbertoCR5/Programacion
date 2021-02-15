@@ -30,7 +30,7 @@ public class Operario extends Empleado{
 	@Override
 	public void setSueldo(int sueldo) throws EmpleadoException {
 
-		if(sueldo > SUELDO_MAXIMO_OPERARIO || sueldo < SUELDO_MINIMO) {
+		if(sueldo > SUELDO_MAXIMO_OPERARIO) {
 			throw  new EmpleadoException("Error, sueldo incorrecto " + sueldo);
 		}
 		super.setSueldo(sueldo);

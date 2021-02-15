@@ -1,6 +1,6 @@
 package Empleado;
 
-public class Informatico extends Empleado{
+public class Informatico extends Empleado {
 
 	private TipoEspecialidad especialidad;
 
@@ -14,7 +14,7 @@ public class Informatico extends Empleado{
 	@Override
 	public void setSueldo(int sueldo) throws EmpleadoException {
 		
-		if(sueldo > SUELDO_MAXIMO_INFORMATICO || sueldo < SUELDO_MINIMO) {
+		if(sueldo > SUELDO_MAXIMO_INFORMATICO) {
 			throw  new EmpleadoException("Error, sueldo incorrecto" + sueldo);
 		}
 		
