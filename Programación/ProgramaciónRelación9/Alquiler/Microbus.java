@@ -7,8 +7,8 @@ public class Microbus extends Vehiculo {
 	public static final int PLAZAS_MAXIMAS = 12;
 	public static final int PRECIO_PLAZA = 5;
 
-	public Microbus(String matricula, TipoGama gama, double precio, int plazas) throws AlquilerException {
-		super(matricula, gama, precio);
+	public Microbus(String matricula, TipoGama gama, int plazas) throws AlquilerException {
+		super(matricula, gama);
 		this.plazas = plazas;
 	}
 
@@ -30,6 +30,7 @@ public class Microbus extends Vehiculo {
 		double precio = 0;
 		
 		precio = PRECIO_PLAZA * plazas;
+		precio = precio * dias;
 		super.setPrecio(precio);
 		
 		return precio;

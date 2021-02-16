@@ -9,8 +9,8 @@ public class Furgoneta extends Vehiculo {
 	public static final int MAXIMO = 1800;
 	public static final double PRECIO_KILO = 0.05;
 	
-	public Furgoneta(String matricula, TipoGama gama, double precio, int PesoMaximoAutorizado) throws AlquilerException {
-		super(matricula, gama, precio);
+	public Furgoneta(String matricula, TipoGama gama, int PesoMaximoAutorizado) throws AlquilerException {
+		super(matricula, gama);
 		this.pesoMaximoAutorizado = PesoMaximoAutorizado;
 
 	}
@@ -39,6 +39,7 @@ public class Furgoneta extends Vehiculo {
 		
 		if (pesoMaximoAutorizado > BAJO) {
 			precio = BAJO * PRECIO_KILO;
+			precio = precio * dias;
 			super.setPrecio(precio);
 		}
 		else {

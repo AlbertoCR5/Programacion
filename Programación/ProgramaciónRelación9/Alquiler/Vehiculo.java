@@ -6,13 +6,13 @@ public abstract class Vehiculo {
 	private TipoGama gama;
 	private double precio;
 	
-	public static final int BAJA = 30;
-	public static final int MEDIA = 40;
-	public static final int ALTA = 50;
+	public static final double PRECIO_BAJA = 30;
+	public static final double PRECIO_MEDIA = 40;
+	public static final double PRECIO_ALTA = 50;
 	
 	public abstract double calcularPrecioAlquiler(int dias);
 	
-	public Vehiculo(String matricula, TipoGama gama, double precio) throws AlquilerException {
+	public Vehiculo(String matricula, TipoGama gama) throws AlquilerException {
 		super();
 		this.matricula = matricula;
 		this.gama = gama;
@@ -45,17 +45,17 @@ public abstract class Vehiculo {
 		switch (gama) {
 		
 		case BAJA:
-			precio = BAJA;
+			precio = PRECIO_BAJA;
 			this.precio = precio;
 			break;
 		
 		case MEDIA:
-			precio = MEDIA;
+			precio = PRECIO_MEDIA;
 			this.precio = precio;
 			break;
 			
 		case ALTA:
-			precio = ALTA;
+			precio = PRECIO_ALTA;
 			this.precio = precio;
 			break;
 		}
