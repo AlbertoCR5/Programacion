@@ -4,18 +4,19 @@ public abstract class Vehiculo {
 
 	private String matricula;
 	private TipoGama gama;
-	private double precio;
+	protected int dias;
 	
 	public static final double PRECIO_BAJA = 30;
 	public static final double PRECIO_MEDIA = 40;
 	public static final double PRECIO_ALTA = 50;
 	
-	public abstract double calcularPrecioAlquiler(int dias);
+	public abstract double calcularPrecioAlquiler(int dias) throws AlquilerException;
 	
-	public Vehiculo(String matricula, TipoGama gama) throws AlquilerException {
+	public Vehiculo(String matricula, TipoGama gama, int dias) throws AlquilerException {
 		super();
 		this.matricula = matricula;
 		this.gama = gama;
+		this.dias = dias;
 	}
 
 	public String getMatricula() {
@@ -33,38 +34,28 @@ public abstract class Vehiculo {
 	public void setGama(TipoGama gama) {
 		this.gama = gama;
 	}
-
 	
-	public double getPrecio() {
+	public int getDias() {
+		return dias;
+	}
 
+	public void setDias(int dias) {
+		this.dias = dias;
+	}
+
+	protected double calcularAlquilerBase(int dias) {
+		
+		double precio;
+		
+		precio = dias * gama.getPrecioBaseGama();
+		
 		return precio;
 	}
-	
-	public void setPrecio(double precio) {
 		
-		switch (gama) {
-		
-		case BAJA:
-			precio = PRECIO_BAJA;
-			this.precio = precio;
-			break;
-		
-		case MEDIA:
-			precio = PRECIO_MEDIA;
-			this.precio = precio;
-			break;
-			
-		case ALTA:
-			precio = PRECIO_ALTA;
-			this.precio = precio;
-			break;
-		}
-		
-	}
 
 	@Override
 	public String toString() {
-		return "Vehiculo [matricula=" + matricula + ", gama=" + gama + "]";
+		return "con matricula " + matricula + ", de gama " + gama + ", " ;
 	}
 	
 	

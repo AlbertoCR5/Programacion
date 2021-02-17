@@ -3,12 +3,14 @@ package Alquiler;
 public class Turismo extends Vehiculo {
 	
 	private TipoCombustion combustion;
+	double precioAlquiler;
+	
 	public static final double PRECIO_GASOLINA = 3.5;
 	public static final double PRECIO_DIESEL = 2;
 
-	public Turismo(String matricula, TipoGama gama, TipoCombustion combustion) throws AlquilerException {
+	public Turismo(String matricula, TipoGama gama, TipoCombustion combustion, int dias) throws AlquilerException {
 		
-		super(matricula, gama);
+		super(matricula, gama, dias);
 		this.combustion = combustion;
 	}
 
@@ -21,30 +23,22 @@ public class Turismo extends Vehiculo {
 	}
 
 	@Override
-	public double calcularPrecioAlquiler(int dias) {
+	public double calcularPrecioAlquiler(int dias) throws AlquilerException {
 		
-		double precio = 0;
+		double precioAlquiler = 0;
 		
-		switch (combustion) {
-		
-		case GASOLINA:
-			precio = 3.5;
-			precio = precio * dias;
-			super.setPrecio(precio);;
-			break;
-			
-		case DIESEL:
-			precio = 2;
-			precio = precio * dias;
-			super.setPrecio(precio);;
-			break;
+		if (dias < 1) {
+			throw new AlquilerException("Error, alquiler minimo de un dia");
 		}
-		return precio;
+		precioAlquiler = combustion.getIncrementoCombustion() + dias;
+		
+		return precioAlquiler + super.calcularAlquilerBase(dias);
+	
 	}
 
 	@Override
 	public String toString() {
-		return super.toString() + "con motor propulsado por " + combustion + ".";
+		return "Turismo " + super.toString() + "con motor propulsado por " + combustion + " tiene un precio de alquiler de " + (precioAlquiler + super.calcularAlquilerBase(dias)) + "€ por los " + dias + " dias";
 	}
 
 
