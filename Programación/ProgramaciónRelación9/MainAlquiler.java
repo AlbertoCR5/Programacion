@@ -14,6 +14,7 @@ import Alquiler.Vehiculo;
 public class MainAlquiler {
 
 	private static final int MAXIMO_VEHICULOS = 50;
+	private static final int MAXIMO_MATRICULA = 9999;
 	private static final int OPCION_UNO = 1;
 	private static final int OPCION_DOS = 2;
 	private static final int OPCION_TRES = 3;
@@ -69,7 +70,8 @@ public class MainAlquiler {
 				if (numeroVehiculos == MAXIMO_VEHICULOS) {
 					System.out.println("No disponemos de ningun vehiculo para alquiler");
 				} else {
-					Vehiculo turismo = new Turismo(obtenerMatricula(), solicitarGama(), solicitarCombustion(), solicitarDiasAlquiler());
+					Vehiculo turismo = new Turismo(obtenerMatricula(), solicitarGama(), solicitarCombustion());
+					turismo.calcularPrecioAlquiler(solicitarDiasAlquiler());
 					if (!estaAlquilado(turismo, vehiculos, numeroVehiculos)) {
 						vehiculos[numeroVehiculos] = turismo;
 						System.out.println(turismo.toString());
@@ -85,7 +87,8 @@ public class MainAlquiler {
 				if (numeroVehiculos == MAXIMO_VEHICULOS) {
 					System.out.println("No disponemos de ningun vehiculo para alquiler");
 				} else {
-					Vehiculo furgoneta = new Furgoneta(obtenerMatricula(), solicitarGama(), solicitarPesoMaximoAutorizado(), solicitarDiasAlquiler());
+					Vehiculo furgoneta = new Furgoneta(obtenerMatricula(), solicitarGama(), solicitarPesoMaximoAutorizado());
+					furgoneta.calcularPrecioAlquiler(solicitarDiasAlquiler());
 					if (!estaAlquilado(furgoneta, vehiculos, numeroVehiculos)) {
 						vehiculos[numeroVehiculos] = furgoneta;
 						System.out.println(furgoneta.toString());
@@ -100,7 +103,8 @@ public class MainAlquiler {
 				if (numeroVehiculos == MAXIMO_VEHICULOS) {
 					System.out.println("No disponemos de ningun vehiculo para alquiler");
 				} else {
-					Vehiculo microbus = new Microbus(obtenerMatricula(), solicitarGama(), solicitarPlazas(), solicitarDiasAlquiler());
+					Vehiculo microbus = new Microbus(obtenerMatricula(), solicitarGama(), solicitarPlazas());
+					microbus.calcularPrecioAlquiler(solicitarDiasAlquiler());
 					if (!estaAlquilado(microbus, vehiculos, numeroVehiculos)) {
 						vehiculos[numeroVehiculos] = microbus;
 						System.out.println(microbus.toString());
@@ -208,7 +212,7 @@ public class MainAlquiler {
 		String matricula;
 
 		Random generarAleatorio = new Random(+1000);
-		numeroMatricula = generarAleatorio.nextInt(MAXIMO_VEHICULOS);
+		numeroMatricula = generarAleatorio.nextInt(MAXIMO_MATRICULA);
 		matricula = String.valueOf(numeroMatricula);
 		matricula = matricula + "KYZ";
 

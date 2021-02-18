@@ -12,11 +12,11 @@ public abstract class Vehiculo {
 	
 	public abstract double calcularPrecioAlquiler(int dias) throws AlquilerException;
 	
-	public Vehiculo(String matricula, TipoGama gama, int dias) throws AlquilerException {
+	public Vehiculo(String matricula, TipoGama gama) throws AlquilerException {
 		super();
 		this.matricula = matricula;
 		this.gama = gama;
-		this.dias = dias;
+
 	}
 
 	public String getMatricula() {
@@ -55,7 +55,7 @@ public abstract class Vehiculo {
 
 	@Override
 	public String toString() {
-		return "con matricula " + matricula + ", de gama " + gama + ", " ;
+		return "con matricula " + matricula + ", de gama " + gama + ", ";
 	}
 	
 	

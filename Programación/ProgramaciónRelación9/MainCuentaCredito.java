@@ -40,7 +40,7 @@ public class MainCuentaCredito {
 			titular = crearNuevoTitular("Introduce nombre completo del cliente");
 			saldoInicial = establecerSaldoInicial("Introduce el saldo inicial de la cuenta perteneciente al cliente " + titular);
 			credito = darCredito("Establece un credito maximo para el cliente " + titular);
-			cuentaCredito = new CuentaCredito(saldoInicial, titular, credito);
+			cuentaCredito = new CuentaCredito(titular, saldoInicial, credito);
 			
 			do {
 				opcion = mostrarMenu();
@@ -102,7 +102,7 @@ public class MainCuentaCredito {
 		return opcion;
 	}
 
-	private static void tratarMenu(int opcion, CuentaCredito cuenta) {
+	private static void tratarMenu(int opcion, CuentaCredito cuentaCredito) {
 
 		double cantidad;
 		
@@ -112,15 +112,15 @@ public class MainCuentaCredito {
 			
 			case 1:
 				cantidad = solicitarCantidad("¿Cuanto dinero desea ingresar?");
-				cuenta.realizarIngreso(cantidad);
+				cuentaCredito.realizarIngreso(cantidad);
 				break;
 				
 			case 2:
 				cantidad = solicitarCantidad("¿Cuanto dinero desea retirar?");
-				cuenta.realizarReintegro(cantidad);
+				cuentaCredito.realizarReintegro(cantidad);
 				
 			case 3:
-				System.out.println(cuenta.toString());
+				System.out.println(cuentaCredito.toString());
 				break;
 				
 			case 4:

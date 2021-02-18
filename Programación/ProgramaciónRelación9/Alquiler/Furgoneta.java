@@ -11,8 +11,8 @@ public class Furgoneta extends Vehiculo {
 	public static final int MAXIMO = 1800;
 	public static final double PRECIO_KILO = 0.05;
 	
-	public Furgoneta(String matricula, TipoGama gama, int PesoMaximoAutorizado, int dias) throws AlquilerException {
-		super(matricula, gama, dias);
+	public Furgoneta(String matricula, TipoGama gama, int PesoMaximoAutorizado) throws AlquilerException {
+		super(matricula, gama);
 		this.pesoMaximoAutorizado = PesoMaximoAutorizado;
 
 	}
@@ -43,24 +43,26 @@ public class Furgoneta extends Vehiculo {
 			throw new AlquilerException("Error, alquiler minimo de un dia");
 		}
 		if (pesoMaximoAutorizado > BAJO) {
-			precioAlquiler = BAJO * PRECIO_KILO * dias;
+			precioAlquiler = precioAlquiler + BAJO * PRECIO_KILO * dias;
 		}
 		else {
 			if (pesoMaximoAutorizado > MEDIO) {
-				precioAlquiler = MEDIO * PRECIO_KILO * dias;
+				precioAlquiler = precioAlquiler + MEDIO * PRECIO_KILO * dias;
 			}
 			else {
-				precioAlquiler = MAXIMO * PRECIO_KILO * dias;
+				precioAlquiler = precioAlquiler + MAXIMO * PRECIO_KILO * dias;
 			}
 				
 		}
-					
-		return precioAlquiler + super.calcularAlquilerBase(dias);
+				
+		precioAlquiler = precioAlquiler + super.calcularAlquilerBase(dias);
+		
+		return precioAlquiler;
 	}
 
 	@Override
 	public String toString() {
-		return "Furgoneta " + super.toString() + "con  " + pesoMaximoAutorizado + "Kgs de peso maximo autorizado, tiene un precio de alquiler de " + (precioAlquiler + super.calcularAlquilerBase(dias)) + " por los " + dias + " dias";
+		return "Furgoneta " + super.toString() + "con  " + pesoMaximoAutorizado + "Kgs de peso maximo autorizado, tiene un precio de alquiler de " + precioAlquiler + " por los " + dias + " dias";
 	}
 
 	

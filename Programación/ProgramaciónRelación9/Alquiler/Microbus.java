@@ -9,8 +9,8 @@ public class Microbus extends Vehiculo {
 	public static final int PLAZAS_MAXIMAS = 12;
 	public static final int PRECIO_PLAZA = 5;
 
-	public Microbus(String matricula, TipoGama gama, int plazas, int dias) throws AlquilerException {
-		super(matricula, gama, dias);
+	public Microbus(String matricula, TipoGama gama, int plazas) throws AlquilerException {
+		super(matricula, gama);
 		this.plazas = plazas;
 	}
 
@@ -35,14 +35,16 @@ public class Microbus extends Vehiculo {
 		if (dias < 1) {
 			throw new AlquilerException("Error, alquiler minimo de un dia");
 		}
-		precioAlquiler = PRECIO_PLAZA * plazas * dias;
+		precioAlquiler = precioAlquiler + PRECIO_PLAZA * plazas * dias;
+		
+		precioAlquiler =  precioAlquiler + super.calcularAlquilerBase(dias);
 
-		return precioAlquiler + super.calcularAlquilerBase(dias);
+		return precioAlquiler;
 	}
 
 	@Override
 	public String toString() {
-		return "Microbus " + super.toString() + "con  " + plazas + " plazas, tiene un precio de alquiler de " + (precioAlquiler + super.calcularAlquilerBase(dias)) + " por los " + dias + " dias";
+		return "Microbus " + super.toString() + "con  " + plazas + " plazas, tiene un precio de alquiler de " + precioAlquiler + " por los " + dias + " dias";
 	}
 
 }

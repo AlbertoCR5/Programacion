@@ -1,26 +1,36 @@
 package Banco;
 
 public class CuentaCredito extends Cuenta {
+	
+	private static final double CREDITO_MINIMO = 100;
+	private static final double CREDITO_DEFECTO = 500;
 
 	// Atributos
-	private int credito;
+	private double credito;
 
 	// Constructor
-	public CuentaCredito(double saldo, String titular, int credito) throws CuentaException {
+	public CuentaCredito(String titular) {
+		
+		super(titular);
+		this.credito = CREDITO_MINIMO;
+	}
+	
+	public CuentaCredito(String titular, double saldo, double credito) throws CuentaException {
 
-		super(saldo, titular);
+		super(titular, saldo);
 
-		if (credito <= 0) {
+		if (credito < CREDITO_MINIMO) {
 			throw new CuentaException("Credito incorrecto " + credito);
 		}
 		this.credito = credito;
 
 	}
 
-	public int getCredito() {
+	
+	public double getCredito() {
 
 		return credito;
-	}
+	}	
 
 	@Override
 	public String toString() { // getSaldo()
@@ -40,16 +50,20 @@ public class CuentaCredito extends Cuenta {
 		if (reintegro > maximoDineroASacar) {
 			throw new CuentaException("No puede sacar la cantidad " + reintegro);
 		}
-
-		if (saldo == 0) {
-			credito = (int) (credito - reintegro);
-		}
 		
 		if (saldo >= 0) {
-			credito = getCredito();
+			credito = CREDITO_DEFECTO;
 		}
 		
+		if (saldo <= 0) {
+			credito = (int) (credito + saldo);
+			saldo = 0;
+		}
+		
+		
 		saldo = saldo - reintegro;
+		
+		super.contadorReintegros++;
 
 	}
 
