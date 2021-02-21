@@ -1,9 +1,10 @@
 
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import Alquiler.AlquilerException;
-import Alquiler.FlotaVehiculos;
+import Alquiler.FlotaVehiculosV2;
 import Alquiler.Furgoneta;
 import Alquiler.Microbus;
 import Alquiler.TipoCombustion;
@@ -13,18 +14,20 @@ import Alquiler.Vehiculo;
 
 public class Principal {
 
-	private static final int OPCION_SALIR = 4;
-	private static Scanner teclado = new Scanner(System.in);
 	public static final int MAXVEHICULOS = 3;
+	private static final int MAXIMO_MATRICULA = 9999;
+	private static final int OPCION_SALIR = 5;
+	private static Scanner teclado = new Scanner(System.in);
+	
 
 	public static void main(String[] args) {
 
 		int opcion;
-		FlotaVehiculos flotaVehiculos;
+		FlotaVehiculosV2 flotaVehiculos;
 	
 
 		try {
-			flotaVehiculos = new FlotaVehiculos(MAXVEHICULOS);
+			flotaVehiculos = new FlotaVehiculosV2(MAXVEHICULOS);
 			do {
 				opcion = mostrarMenu();
 				tratarMenu(opcion, flotaVehiculos);
@@ -36,7 +39,7 @@ public class Principal {
 
 	}
 
-	private static void tratarMenu(int opcion, FlotaVehiculos flotaVehiculos) {
+	private static void tratarMenu(int opcion, FlotaVehiculosV2 flotaVehiculos) {
 		Vehiculo vehiculo;
 		String matricula;
 		int dias;
@@ -63,6 +66,15 @@ public class Principal {
 			}
 			case 3:{ // consulta
 				System.out.println(flotaVehiculos);
+				break;
+			}
+			
+			
+			case 4: {
+				
+				matricula = introduceMatricula();
+				flotaVehiculos.bajaVehiculo(matricula);
+				break;
 			}
 
 			}
@@ -101,7 +113,7 @@ public class Principal {
 
 		tipoVehiculo = solicitarTipoVehiculo();
 
-		matricula = introduceMatricula();
+		matricula = obtenerMatricula();
 		gama = introduceGama();
 
 		switch (tipoVehiculo) {
@@ -200,7 +212,8 @@ public class Principal {
 			System.out.println("1.-Alta vehiculo");
 			System.out.println("2.-Precio Alquiler");
 			System.out.println("3.-Consultar Vehiculos");
-			System.out.println("4.-Salir");
+			System.out.println("4.-Dar baja a vehiculo");
+			System.out.println("5.-Salir");
 			try {
 				op = Integer.parseInt(teclado.nextLine());
 			} catch (NumberFormatException e) {
@@ -211,4 +224,17 @@ public class Principal {
 		return op;
 	}
 
+	private static String obtenerMatricula() {
+
+		int numeroMatricula;
+		String matricula;
+
+		Random generarAleatorio = new Random(+1000);
+		numeroMatricula = generarAleatorio.nextInt(MAXIMO_MATRICULA);
+		matricula = String.valueOf(numeroMatricula);
+		matricula = matricula + "KYZ";
+		System.out.println(matricula);
+
+		return matricula;
+	}
 }

@@ -23,7 +23,7 @@ public class FlotaVehiculos {
 		
 		vehiculoEncontrado = buscarMatricula(vehiculo.getMatricula());
 		if (vehiculoEncontrado != null) { // Se encontro un coche con esa matricula
-			throw new AlquilerException("Ya existe un coche con esa matricula");
+			throw new AlquilerException("Ya existe un coche con esa matricula" + vehiculo.getMatricula());
 		}
 		if (numeroRealDeVehiculos == vehiculos.length) {
 			throw new AlquilerException("No se pueden introducir mas vehiculos");
