@@ -14,13 +14,12 @@ public abstract class Personaje {
 	protected int vidaActual;
 	
 	public Personaje(String nombre, TipoRaza raza, int fuerza, int inteligencia, int vidaMaxima) throws PersonajeException {
-		super();
 		setNombre(nombre);
 		setRaza(raza);
 		setFuerza(fuerza);
 		setInteligencia(inteligencia);
 		setVidaMaxima(vidaMaxima);
-		setVidaActual(getVidaMaxima());
+		setVidaActual(vidaMaxima);
 	}
 	
 	//Getter & setter
@@ -107,9 +106,27 @@ public abstract class Personaje {
 		this.vidaActual = vidaActual;
 	}
 	
-	public boolean equals(Personaje otro) {
-		return this.nombre.equals(otro.getNombre());
+	public int compareTo(Personaje otro) {
+		
+//		int resultado;
+//		
+//		if(this.getVidaActual() < otro.getVidaActual() ) {
+//			resultado = 1;
+//		}
+//		else {
+//			if (this.getVidaActual() > otro.getVidaActual()) {
+//				resultado = -1;
+//			}
+//			else {
+//				resultado = 0;
+//			}
+//			return resultado;
+//		}
+		return Integer.compare(otro.getVidaActual(), this.getVidaActual());
+
 	}
+	
+
 
 	@Override
 	public String toString() {
