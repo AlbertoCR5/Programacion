@@ -46,29 +46,6 @@ public class ListaPersonajes implements Comparable<Personaje>{
 		
 	}
 
-	private int buscarPosicionLibre() throws PersonajeException {
-		
-		int posicion = -1;
-		boolean encontrado = false;
-		
-		for (int i = 0; i < listaPersonajes.length && !encontrado; i++) {
-			
-			Personaje personaje = listaPersonajes[i];
-			
-			if (personaje == null) {
-				posicion = i;
-				encontrado = true;
-			}
-		}
-
-		if (!encontrado) {
-			throw new PersonajeException("No se pueden incorporar mas personajes");
-		}
-		
-		return posicion;
-	}
-
-
 	/**
 	 * Se encarga de añadir el hechizo al objeto personaje
 	 * @param nombreMago String nombre del mago que aprende el hechizo
@@ -114,22 +91,6 @@ public class ListaPersonajes implements Comparable<Personaje>{
 		return personaje;
 	}
 
-	private int buscarHechizo(TipoHechizo hechizo) {
-		
-		boolean existe = false;
-		int posicion = -1;
-		
-		for (int i = 0; i < hechizos.length && existe == false; i++) {
-			
-			if (hechizos[i] != null && hechizos[i].equals(hechizo)) {
-				existe = true;
-				posicion = i;
-			}
-			
-		}
-
-		return posicion;
-	}
 
 	/**
 	 * Se encarga de buscar el nombre del mago, su hechizo y nombre del personaje
