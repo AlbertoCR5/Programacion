@@ -1,5 +1,7 @@
 package JuegoRol;
 
+import java.util.Arrays;
+
 public class ListaPersonajes implements Comparable<Personaje>{
 
 	private Personaje listaPersonajes[];
@@ -28,35 +30,20 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 */
 	public void incorporarPersonaje (Personaje personajeIncorporado) throws PersonajeException {
 		
-		int posicion;
-		int posicionInsercion;
-		
-		posicion = buscarPersonaje(personajeIncorporado.getNombre());
-		if (posicion != -1) { //Se encontro un coche con esa matricula
-			throw new PersonajeException("Ya existe un personaje con ese nombre");
+		if (cantidadPersonajes == listaPersonajes.length) {
+			throw new PersonajeException("Error, lista de personajes llena");
 		}
 		
-		posicionInsercion = buscarPosicionLibre();
-		listaPersonajes[posicionInsercion] = personajeIncorporado;
-		
-	}
-	
-	private int buscarPersonaje(String nombre) {
-		
-		boolean existe = false;
-		int posicion = -1;
-		
-		for (int i = 0; i < listaPersonajes.length && existe == false; i++) {
-			
-			if (listaPersonajes[i] != null && nombre.equalsIgnoreCase(listaPersonajes[i].getNombre())) {
-				existe = true;
-				posicion = i;
+		for (int i = 0; i <= cantidadPersonajes; i++) {
+			if (listaPersonajes[i].getNombre().equals(personajeIncorporado.getNombre())) {
+				throw new PersonajeException("Error, este personaje ya existe");
 			}
-			
 		}
 		
-		return posicion;
-
+		listaPersonajes[cantidadPersonajes] = personajeIncorporado;
+		
+		cantidadPersonajes++;
+		
 	}
 
 	private int buscarPosicionLibre() throws PersonajeException {
@@ -91,21 +78,42 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 */
 	public void aprenderHechizoMago(String nombreMago, TipoHechizo hechizo) throws PersonajeException {
 		
-		int posicion = -1;
-		int posicionInsercion;
+		Personaje personaje;
 		
-		posicion = buscarHechizo(hechizo);
+		personaje = encontrarPersonaje(nombreMago);
 		
-		if (posicion != -1) {
-			throw new PersonajeException("Este personaje ya sabe ese hechizo" + hechizo);
+		if (personaje == null) {
+			throw new PersonajeException("No existe el mago " + nombreMago);
 		}
 		
-		posicionInsercion = buscarPosicionLibre();
-		
-		hechizos[posicionInsercion] = hechizo;
+		if (personaje instanceof Mago) {
+//			Mago mago = (Mago)personaje;
+//			mago.aprenderHechizo(hechizo);
+			((Mago)personaje).aprenderHechizo(hechizo); //Es lo mismo que las dos lineas anteriores
+		}
+		else {
+			throw new PersonajeException("El personaje no puede aprender el hechizo porque no es un mago");
+		}
 		
 	}
 	
+	private Personaje encontrarPersonaje(String nombre) {
+		
+		Personaje personaje = null;
+		boolean encontrado = false;
+		
+		for (int i = 0; i <= cantidadPersonajes && !encontrado; i++) {
+			
+			if (nombre.equals(listaPersonajes[i].getNombre())) {
+				personaje = listaPersonajes[i];
+				encontrado = true;
+			}
+			
+		}
+		
+		return personaje;
+	}
+
 	private int buscarHechizo(TipoHechizo hechizo) {
 		
 		boolean existe = false;
@@ -133,28 +141,30 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 * asi mismo comprobando la posicion en el array
 	 * @throws MuerteException 
 	 */
-	public void lanzarHechizoPersonaje (String nombreMagoAtacante, String nombreMagoDefensor, TipoHechizo hechizo) throws PersonajeException {
-		
-		int posicion;
-		
-		if (nombreMagoAtacante.equalsIgnoreCase(nombreMagoDefensor)) {
-			throw new PersonajeException("No se puede lanzar un hechizo a si mismo");
-		}
-		posicion = buscarHechizo(hechizo);
-		
-		if (posicion == -1) {
-			throw new PersonajeException("No existe ese hechizo" +  hechizo);
+	public void lanzarHechizoPersonaje (String nombreMagoAtacante, String nombrePersonajeAtacado, TipoHechizo hechizo) throws PersonajeException {
 
+		Personaje personajeAtacado = null;
+		Personaje personajeAtacante = null;
+		
+		personajeAtacante = encontrarPersonaje(nombreMagoAtacante);
+		personajeAtacado = encontrarPersonaje(nombrePersonajeAtacado);
+		
+		if (personajeAtacante == null || !(personajeAtacante instanceof Mago)) {
+			throw new PersonajeException("No se ha encontrado ningun mago con el nombre" + nombreMagoAtacante);
 		}
 		
-		hacerDanno(nombreMagoDefensor);
+		if (personajeAtacado == null) {
+			throw new PersonajeException("No se ha encontrado ningun mago con el nombre" + nombrePersonajeAtacado);
+		}
 		
-		hechizos[posicion] = null;
-	}
-	
-	private void hacerDanno(String nombreMagoDefensor) {
-
+		if (personajeAtacante.equals(personajeAtacado)) {
+			throw new PersonajeException("El personaje esta tan confuso que intento atacarse a si mismo, pero no se puede");
+		}
+		((Mago)personajeAtacante).lanzarHechizo(hechizo, personajeAtacado);
 		
+//		if (personajeAtacado.getVidaActual() == Personaje.VALOR_MINIMO) {
+//			throw new PersonajeException("El personaje " + nombrePersonajeAtacado + " esta muerto");
+//		}
 	}
 
 	/**
@@ -164,24 +174,26 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 * @throws PersonajeException En el metodo comprobarPersonajeExiste, si es un clerigo en la posClerigo del array y
 	 * si la posClerigo y posPersonaje no son iguales para comprobar que no se cura asi mismo 
 	 */
-	public void curarPersonaje (String nombreClerigo, String nombrePersonaje) {
-//		
-//		clerigo = (Clerigo)personajeClerigo;
-//		if (nombreClerigo.equalsIgnoreCase(nombrePersonaje)){
-//			throw new PersonajeException("No se puede curar a si mismo");
-//		}
-//		
-//		if (super.getVidaActual() == VIDA_MAXIMA) {
-//			throw new PersonajeException("No se puede curar a un personaje con la vida actual al maximo");
-//		}
-//		
-//		if (super.getVidaActual() == VALOR_MINIMO) {
-//			throw new PersonajeException("No se puede curar a un personaje con la vida actual al maximo");
-//		}
-//		
-//		otro.setVidaActual(otro.getVidaActual() + PUNTOS_CURACION);
-//	
-//		clerigo.curar(personajeCurado);
+	public void curarPersonaje (String nombreClerigo, String nombrePersonaje) throws PersonajeException {
+
+		Personaje clerigo;
+		Personaje personajeCurado = null;
+		
+		clerigo = encontrarPersonaje(nombreClerigo);
+		personajeCurado = encontrarPersonaje(nombrePersonaje);
+		
+		if (clerigo == null || ! (clerigo instanceof Clerigo)) {
+			throw new PersonajeException("Error, no se ha encontrado un clerigo con nombre " + nombreClerigo);
+		}
+		
+		if (personajeCurado == null) {
+			throw new PersonajeException("Error, no se ha encontrado un personaje con nombre " + personajeCurado);
+		}
+		
+		if (clerigo instanceof Clerigo) {
+			((Clerigo) clerigo).curar(personajeCurado);
+		}			
+	
 	}
 	
 	/**
@@ -192,10 +204,13 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 * @return String del array ya ordenado
 	 */
 	public String mostrarListadoPuntosActuales (){
-		return null;
 		
+		Personaje[] arrayOrdenado = new Personaje[cantidadPersonajes];
 		
+		Arrays.sort(arrayOrdenado);
 		
+		return toString();
+	
 	}
 	
 	/**

@@ -1,6 +1,6 @@
 package JuegoRol;
 
-public abstract class Personaje {
+public abstract class Personaje implements Comparable<Personaje>{
 
 	public static final int VALOR_MINIMO = 0;
 	public static final int CARACTERISTICAS_MAXIMAS = 20;
