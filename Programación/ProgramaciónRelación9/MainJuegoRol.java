@@ -1,6 +1,5 @@
 import java.util.Arrays;
 import java.util.Scanner;
-
 import JuegoRol.Clerigo;
 import JuegoRol.ListaPersonajes;
 import JuegoRol.Mago;
@@ -106,7 +105,7 @@ public class MainJuegoRol {
 
 			case 2:
 				personajeACurar = introducirCadena("Introduzca el nombre del mago:");
-				hechizo = elegirHechizo("Elija un hechizo");
+				hechizo = elegirHechizo("Elija un hechizo" + Arrays.toString(TipoHechizo.values()) + ":");
 				listaPersonajes.aprenderHechizoMago(personajeACurar, hechizo);
 				System.out.println("Hechizo aprendido");
 				break;
@@ -255,10 +254,17 @@ public class MainJuegoRol {
 		do {
 			try {
 				System.out.println(string);
-				System.out.println("(1)" + TipoHechizo.JUNIT);
-				System.out.println("(2)" + TipoHechizo.PRUEBA_CAJAS_BLANCAS);
-				System.out.println("(3)" + TipoHechizo.PRUEBA_CAJAS_NEGRAS);
-				System.out.println("(4)" + TipoHechizo.SABOR_A_SUSPENSO);
+				System.out.println("(0)" + TipoHechizo.JUNIT);
+				System.out.println("(1)" + TipoHechizo.PRUEBA_CAJAS_BLANCAS);
+				System.out.println("(2)" + TipoHechizo.PRUEBA_CAJAS_NEGRAS);
+				System.out.println("(3)" + TipoHechizo.SABOR_A_SUSPENSO);
+				System.out.println("(4)" + TipoHechizo.ARRAYS);
+				System.out.println("(5)" + TipoHechizo.BUSCAR_APARCAMIENTO);
+				System.out.println("(6)" + TipoHechizo.CADENAS);
+				System.out.println("(7)" + TipoHechizo.STRING_BUILDER);
+				System.out.println("(8)" + TipoHechizo.TUNEL_DEL_VIENTO);
+				System.out.println("(9)" + TipoHechizo.COVID);
+				
 				numero = Integer.parseInt(teclado.nextLine());
 				hayFallo = false;
 			} catch (NumberFormatException e) {
@@ -269,20 +275,44 @@ public class MainJuegoRol {
 		
 		switch (numero) {
 		
-		case 1:
+		case 0:
 			hechizo = TipoHechizo.JUNIT;
 			break;
 			
-		case 2:
+		case 1:
 			hechizo = TipoHechizo.PRUEBA_CAJAS_BLANCAS;
 			break;
 			
-		case 3:
+		case 2:
 			hechizo = TipoHechizo.PRUEBA_CAJAS_NEGRAS;
 			break;
 			
-		case 4:
+		case 3:
 			hechizo = TipoHechizo.SABOR_A_SUSPENSO;
+			break;
+			
+		case 4:
+			hechizo = TipoHechizo.ARRAYS;
+			break;
+			
+		case 5:
+			hechizo = TipoHechizo.BUSCAR_APARCAMIENTO;
+			break;
+			
+		case 6:
+			hechizo = TipoHechizo.CADENAS;
+			break;
+			
+		case 7:
+			hechizo = TipoHechizo.STRING_BUILDER;
+			break;
+			
+		case 8:
+			hechizo = TipoHechizo.TUNEL_DEL_VIENTO;
+			break;
+			
+		case 9:
+			hechizo = TipoHechizo.COVID;
 			break;
 			
 		}

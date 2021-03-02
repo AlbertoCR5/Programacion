@@ -155,13 +155,13 @@ public class Mago extends Personaje {
 	 * @throws PersonajeException
 	 */
 	private void hacerDanno(Personaje otro) throws PersonajeException {
-
-		if (otro.getVidaActual() - PUNTOS_DANNO <= 0) { //Si al dañar la vida es negativa, esta pasa a ser 0
+		
+		if (otro.getVidaActual() - TipoHechizo.getDanio() <= 0) { //Si al dañar la vida es negativa, esta pasa a ser 0
 			otro.setVidaActual(0);
 			throw new PersonajeException("El personaje " + otro.getNombre() + " is dead. RIP");
 		}
 		
-		otro.setVidaActual(otro.getVidaActual() - PUNTOS_DANNO);
+		otro.setVidaActual(otro.getVidaActual() - TipoHechizo.getDanio());
 	}
 
 	@Override

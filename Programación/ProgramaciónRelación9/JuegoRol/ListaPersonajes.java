@@ -2,11 +2,10 @@ package JuegoRol;
 
 import java.util.Arrays;
 
-public class ListaPersonajes implements Comparable<Personaje>{
+public class ListaPersonajes {
 
 	private Personaje listaPersonajes[];
 	private int cantidadPersonajes;
-	private TipoHechizo hechizos[];
 	
 	/**
 	 * Se encarga de inicializar el array con la cantidad del array que se le pasa por parametro
@@ -30,16 +29,20 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 */
 	public void incorporarPersonaje (Personaje personajeIncorporado) throws PersonajeException {
 		
+		Personaje personaje;
+		
+		personaje = encontrarPersonaje(personajeIncorporado.getNombre());
+		
+		
+		if (personaje != null) {
+				throw new PersonajeException("Error, este personaje ya existe");
+		}
+		
+		
 		if (cantidadPersonajes == listaPersonajes.length) {
 			throw new PersonajeException("Error, lista de personajes llena");
 		}
-		
-		for (int i = 0; i <= cantidadPersonajes; i++) {
-			if (listaPersonajes[i].getNombre().equals(personajeIncorporado.getNombre())) {
-				throw new PersonajeException("Error, este personaje ya existe");
-			}
-		}
-		
+
 		listaPersonajes[cantidadPersonajes] = personajeIncorporado;
 		
 		cantidadPersonajes++;
@@ -47,7 +50,7 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	}
 
 	/**
-	 * Se encarga de aÃ±adir el hechizo al objeto personaje
+	 * Se encarga de añadir el hechizo al objeto personaje
 	 * @param nombreMago String nombre del mago que aprende el hechizo
 	 * @param nombreHechizo String nombre del hechizo que va a aprender el mago
 	 * @throws PersonajeException En el metodo comprobarPersonajeExiste, cuando se comprueba que si el objeto
@@ -55,18 +58,18 @@ public class ListaPersonajes implements Comparable<Personaje>{
 	 */
 	public void aprenderHechizoMago(String nombreMago, TipoHechizo hechizo) throws PersonajeException {
 		
-		Personaje personaje;
+		Personaje personajeEncontrado;
 		
-		personaje = encontrarPersonaje(nombreMago);
+		personajeEncontrado = encontrarPersonaje(nombreMago);
 		
-		if (personaje == null) {
+		if (personajeEncontrado == null) {
 			throw new PersonajeException("No existe el mago " + nombreMago);
 		}
 		
-		if (personaje instanceof Mago) {
+		if (personajeEncontrado instanceof Mago) {
 //			Mago mago = (Mago)personaje;
 //			mago.aprenderHechizo(hechizo);
-			((Mago)personaje).aprenderHechizo(hechizo); //Es lo mismo que las dos lineas anteriores
+			((Mago)personajeEncontrado).aprenderHechizo(hechizo); //Es lo mismo que las dos lineas anteriores
 		}
 		else {
 			throw new PersonajeException("El personaje no puede aprender el hechizo porque no es un mago");
@@ -79,7 +82,7 @@ public class ListaPersonajes implements Comparable<Personaje>{
 		Personaje personaje = null;
 		boolean encontrado = false;
 		
-		for (int i = 0; i <= cantidadPersonajes && !encontrado; i++) {
+		for (int i = 0; i < cantidadPersonajes && !encontrado; i++) {
 			
 			if (nombre.equals(listaPersonajes[i].getNombre())) {
 				personaje = listaPersonajes[i];
@@ -168,12 +171,24 @@ public class ListaPersonajes implements Comparable<Personaje>{
 		
 		Personaje[] arrayOrdenado = new Personaje[cantidadPersonajes];
 		
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			
+			arrayOrdenado[i] = listaPersonajes[i];
+		}
+		
 		Arrays.sort(arrayOrdenado);
 		
-		return toString();
-	
+		StringBuilder sb = new StringBuilder();
+		
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			
+			sb.append((i+1) + ". " + arrayOrdenado[i] + "\n");
+		
+		}
+		
+		return sb.toString();
 	}
-	
+			
 	/**
 	 * Almacena en un String todos los personajes almacenados en el array
 	 * @return String de todos los personajes creados
@@ -190,13 +205,5 @@ public class ListaPersonajes implements Comparable<Personaje>{
 		return sb.toString();
 	}
 
-	@Override
-	public int compareTo(Personaje arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	
-	
 
 }
