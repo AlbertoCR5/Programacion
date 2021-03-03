@@ -1,18 +1,15 @@
 package Profesores;
 
-public abstract class Profesor {
+public abstract class Profesor implements EvaluableAnualmente {
 
 	public final static int NOTA_MINIMA = 0;
-	public final static int NOTA_MAXIMA_PRIMARIA = 5;
-	public final static int NOTA_MAXIMA_SECUNDARIA = 10;
-	public final static int ANTIGUEDAD_SECUNDARIA_CAMBIO = 2;
-	public final static int ANTIGUEDAD_PRIMARIA_CAMBIO = 3;
+	public final static int NO_EVALUADO = -1;
+	public static final int DNI_ALFANUMERICO = 9;
+	
 	private String dni;
 	private String nombre;
 	private String centroAdjudicado;
-	private int antiguedad;
-
-	public abstract void evaluacionAnual(int nota);
+	protected int antiguedad;
 
 	public Profesor(String dni, String nombre, String centroAdjudicado) throws ProfesoresException {
 		setDni(dni);
@@ -25,7 +22,11 @@ public abstract class Profesor {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDni(String dni) throws ProfesoresException {
+		
+		if (dni.length() != DNI_ALFANUMERICO ) {
+			throw new ProfesoresException("El DNI debe tener " + DNI_ALFANUMERICO + " caracteres");
+		}
 		this.dni = dni;
 	}
 
@@ -37,19 +38,11 @@ public abstract class Profesor {
 		this.nombre = nombre;
 	}
 
-	public String getCentroAdjudicado() {
+	public String getCentroAdjudicado() throws ProfesoresException {
 		return centroAdjudicado;
 	}
 
 	public void setCentroAdjudicado(String centroAdjudicado) throws ProfesoresException {
-
-		if (centroAdjudicado != this.centroAdjudicado) {
-			throw new ProfesoresException("Error, centro incorrecto");
-		}
-		if (antiguedad < 0) {
-			throw new ProfesoresException("Error, antiguedad no puede te4ner valor negativo");
-		}
-
 		this.centroAdjudicado = centroAdjudicado;
 		this.antiguedad = 0;
 	}
@@ -57,25 +50,12 @@ public abstract class Profesor {
 	public int getAntiguedad() {
 		return antiguedad;
 	}
-
-	public void cambiarDeCentro(Profesor otro) throws ProfesoresException {
-
-		if (otro instanceof ProfesorPrimaria) {
-			if (antiguedad < ANTIGUEDAD_PRIMARIA_CAMBIO) {
-				throw new ProfesoresException("No dispones de la antiguedad suficiente para el cambio");
-			}
-			setCentroAdjudicado(centroAdjudicado);
-		} else {
-			if (otro instanceof ProfesorSecundaria) {
-				if (antiguedad < ANTIGUEDAD_SECUNDARIA_CAMBIO) {
-					throw new ProfesoresException("No dispones de la antiguedad suficiente para el cambio");
-				}
-				setCentroAdjudicado(centroAdjudicado);
-			}
-		}
-
+	
+	//Metodo que sirve para hacer antiguedad protegida y asi poder llamar al metodo desde otra clase
+	protected void incrementarAntiguedad() {
+		antiguedad++;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Nombre=" + nombre + " centroAdjudicado=" + centroAdjudicado + ", antiguedad=" + antiguedad;
