@@ -6,25 +6,33 @@ public class ProfesorSecundaria extends Profesor {
 	public final static int ANTIGUEDAD_SECUNDARIA_CAMBIO = 2;
 	
 	private EspecialidadesSecundaria especialidad;
-	private double notaMedia;
+	private int sumaTodasNotas;
+	private int numeroTotalEvaluaciones;
+	
 
 	public ProfesorSecundaria(String dni, String nombre, String centroAdjudicado, EspecialidadesSecundaria especialidad) throws ProfesoresException {
 		super(dni, nombre, centroAdjudicado);
-		setEspecialidad(especialidad);
-		this.notaMedia = NO_EVALUADO;
+		this.especialidad = especialidad;
+		this.sumaTodasNotas = NO_EVALUADO;
+		this.numeroTotalEvaluaciones = NO_EVALUADO;
 	}
 
 	public EspecialidadesSecundaria getEspecialidad() {
 		return especialidad;
 	}
 
-	public void setEspecialidad(EspecialidadesSecundaria especialidad) {
-
-		this.especialidad = especialidad;
-	}
+	//No es necesario el set de especialidad
+//	public void setEspecialidad(EspecialidadesSecundaria especialidad) {
+//
+//		this.especialidad = especialidad;
+//	}
 	
-	public double getNotaMedia() {
-		return notaMedia;
+	public double getNotaMedia() throws ProfesoresException {
+		
+		if (numeroTotalEvaluaciones == 0) {
+			throw new ProfesoresException("No se ha evaluado aun");
+		}
+		return (double)sumaTodasNotas / numeroTotalEvaluaciones; //notaMedia
 	}
 	
 	@Override
@@ -42,7 +50,8 @@ public class ProfesorSecundaria extends Profesor {
 		if (nota < NOTA_MINIMA || nota > NOTA_MAXIMA_SECUNDARIA) {
 			throw new ProfesoresException("La nota de la evaluacion debe de estar entre " + NOTA_MINIMA + " y " + NOTA_MAXIMA_SECUNDARIA);
 		}
-		this.notaMedia = nota;
+		sumaTodasNotas += nota;
+		numeroTotalEvaluaciones++;
 		
 		super.incrementarAntiguedad(); // o incrementarAntiguedad()
 	}

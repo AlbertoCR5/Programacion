@@ -10,36 +10,37 @@ public class ProfesorPrimaria extends Profesor {
 	private double notaUltimaEvaluacion;
 	
 	//Constructores
+	//Constructor sin eleccion de especialidad, asignamos general
+	public ProfesorPrimaria(String dni, String nombre, String centroAdjudicado) throws ProfesoresException { 
+		super(dni, nombre, centroAdjudicado);
+		this.especialidad = EspecialidadesPrimaria.GENERAL;
+		this.notaUltimaEvaluacion = NO_EVALUADO;
+	}
+	
 	public ProfesorPrimaria(String dni, String nombre, String centroAdjudicado, EspecialidadesPrimaria especialidad) throws ProfesoresException {
 		super(dni, nombre, centroAdjudicado);
 		this.especialidad = especialidad; //
 		this.notaUltimaEvaluacion = NO_EVALUADO;
 	}
 	
-	public ProfesorPrimaria(String dni, String nombre, String centroAdjudicado) throws ProfesoresException {
-		super(dni, nombre, centroAdjudicado);
-		this.especialidad = EspecialidadesPrimaria.GENERAL;
-		this.notaUltimaEvaluacion = NO_EVALUADO;
-	}
-
 	public EspecialidadesPrimaria getEspecialidad() {
 		return especialidad;
 	}
-
-	public void setEspecialidad(EspecialidadesPrimaria especialidad) {
-			this.especialidad = especialidad;
-	}	
 	
 	public double getNotaUltimaEvaluacion() {
 		return notaUltimaEvaluacion;
 	}
+
 	
 	@Override
 	public void setCentroAdjudicado(String centroAdjudicado) throws ProfesoresException {
 		
-		if(super.getAntiguedad() < ANTIGUEDAD_PRIMARIA_CAMBIO) {
+			//super.getAntiguedad() o this.getAntiguedad() tambien valen
+		if(getAntiguedad() < ANTIGUEDAD_PRIMARIA_CAMBIO) {
 			throw new ProfesoresException("No dispones de la antiguedad suficiente para cambiar de centro. Minimo " + ANTIGUEDAD_PRIMARIA_CAMBIO);
 		}
+		
+		//Aqui es imprescindible el super.
 		super.setCentroAdjudicado(centroAdjudicado);
 	}
 
@@ -49,9 +50,11 @@ public class ProfesorPrimaria extends Profesor {
 		if (nota < NOTA_MINIMA || nota > NOTA_MAXIMA_PRIMARIA) {
 			throw new ProfesoresException("La nota de la evaluacion debe de estar entre " + NOTA_MINIMA + " y " + NOTA_MAXIMA_PRIMARIA);
 		}
-		this.notaUltimaEvaluacion = nota;
 		
-		super.antiguedad++; //Haciendo de antiguedad un atributo protegido
+		//o this.notaUltimaEvaluacion = nota;
+		notaUltimaEvaluacion = nota;
+		
+		super.antiguedad++; //Haciendo de antiguedad un atributo protegido o super.incrementarAntiguedad();
 	}
 
 	@Override
@@ -61,6 +64,5 @@ public class ProfesorPrimaria extends Profesor {
 				+ "]";
 	}
 
-
-
+	
 }
