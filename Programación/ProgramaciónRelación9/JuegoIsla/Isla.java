@@ -5,10 +5,11 @@ public class Isla {
 	public static final int PERSONAJES_MINIMOS = 2;
 	public static final int PERSONAJES_MAXIMOS = 10;
 	
-	private Personaje personajes[];
 	private String nombre;
 	private int capacidad;
-	public Isla(String nombre) {
+	public static int cantidadPersonajes;
+	
+	public Isla(String nombre) throws JuegoException {
 
 		this.nombre = nombre;
 		setCapacidad(capacidad);

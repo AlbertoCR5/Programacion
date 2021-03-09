@@ -14,11 +14,21 @@ public class Personaje {
 	private int edad;
 	public int totalPertenencias;
 	
+
 	public Personaje(String nombre, String nombreIslaNacimiento) throws JuegoException {
 		
 		this.nombre = nombre;
 		this.nombreIslaNacimiento = nombreIslaNacimiento;
-		setEdad(edad);
+		this.edad = EDAD_MINIMA;
+		pertenencias = new String[PERTENENCIAS_MAXIMAS];
+	}
+
+	public Personaje(String nombre, String nombreIslaNacimiento, int edad) throws JuegoException{
+
+		this.nombre = nombre;
+		this.nombreIslaNacimiento = nombreIslaNacimiento;
+		this.edad = edad;
+		pertenencias = new String[PERTENENCIAS_MAXIMAS];
 	}
 
 	public String getNombre() {
@@ -56,6 +66,14 @@ public class Personaje {
 	public void setPertenencias(String pertenencias[]) {
 		this.pertenencias = pertenencias;
 	}
+	
+	public int getTotalPertenencias() {
+		return totalPertenencias;
+	}
+
+	public void setTotalPertenencias(int totalPertenencias) {
+		this.totalPertenencias = totalPertenencias;
+	}
 
 	public void adquirirPertenencia(String pertenencia) throws JuegoException {
 	
@@ -71,7 +89,10 @@ public class Personaje {
 		posicionInsercion = buscarPosicionLibre();
 		
 		pertenencias[posicionInsercion] = pertenencia;
+		
+		totalPertenencias++;
 	}
+	
 	private int buscarPosicionLibre() throws JuegoException {
 
 		int posicion = -1;
@@ -130,16 +151,17 @@ public class Personaje {
 		
 	}
 	
-	private void hacerRegalo(Personaje otro) {
-		
-		
+	private void hacerRegalo(Personaje otro) throws JuegoException {	
 		
 		if (otro.nombreIslaNacimiento != otro.getNombreIslaNacimiento()) {
-			
+			throw new JuegoException("Error, no se puede regalar un objeto a un personaje que pertenece a otra isla");
 		}
 		
+		
+		otro.setPertenencias(otro.getPertenencias());
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Personaje [nombre=" + nombre + ", nombreIslaNacimiento=" + nombreIslaNacimiento + ", pertenencias="
