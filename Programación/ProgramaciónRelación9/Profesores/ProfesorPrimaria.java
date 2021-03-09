@@ -60,8 +60,16 @@ public class ProfesorPrimaria extends Profesor {
 	@Override
 	public String toString() {
 		
-		return super.toString() + "ProfesorPrimaria [especialidad=" + especialidad + ", notaUltimaEvaluacion=" + notaUltimaEvaluacion
-				+ "]";
+		String cadena;
+		
+		if ( notaUltimaEvaluacion == NO_EVALUADO) {
+			cadena=super.toString() + "  especialidad + " +  especialidad + "SIN NOTA";
+		}
+		else {
+			cadena=super.toString() + "  especialidad + " +  especialidad + "Nota ultima evaluacion " + notaUltimaEvaluacion;
+		}
+		
+		return cadena;
 	}
 
 	

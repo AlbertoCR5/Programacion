@@ -56,5 +56,19 @@ public class ProfesorSecundaria extends Profesor {
 		super.incrementarAntiguedad(); // o incrementarAntiguedad()
 	}
 
+	@Override
+	public String toString() {
+		
+		String cadena;
+		
+		if ( numeroTotalEvaluaciones==0) {
+			cadena=super.toString() + "  especialidad + " +  especialidad + "SIN NOTA MEDIA";
+		}
+		else {
+			cadena=super.toString() + "  especialidad + " +  especialidad + "Nota media " + (double) sumaTodasNotas/numeroTotalEvaluaciones ;
+		}
+		
+		return cadena;
+	}
 	
 }
