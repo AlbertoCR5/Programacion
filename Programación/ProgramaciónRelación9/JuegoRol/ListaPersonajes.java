@@ -2,7 +2,7 @@ package JuegoRol;
 
 import java.util.Arrays;
 
-public class ListaPersonajes {
+public class ListaPersonajes implements CreableEstadisticas{
 
 	private Personaje listaPersonajes[];
 	private int cantidadPersonajes;
@@ -203,6 +203,56 @@ public class ListaPersonajes {
 		}
 		
 		return sb.toString();
+	}
+
+	@Override
+	public double minimo() {
+		
+		double minimo = listaPersonajes[0].getVidaActual();
+		
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			
+			if(listaPersonajes[i].getVidaActual() <= minimo) {
+				minimo = listaPersonajes[i].getVidaActual();
+			}
+			
+		}
+		
+		return minimo;
+	}
+
+	@Override
+	public double maximo() {
+
+//		if (cantidadPersonajes == 0) {
+//			throw new nullPointerException();
+//		}
+		double maximo = listaPersonajes[0].getVidaActual();
+		
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			
+			if(maximo <= listaPersonajes[i].getVidaActual() ) {
+				maximo = listaPersonajes[i].getVidaActual();
+			}
+			
+		}
+		
+		return maximo;
+	}
+
+	@Override
+	public double media() {
+
+		double suma = 0;
+		double media;
+		
+		for (int i = 0; i < cantidadPersonajes; i++) {
+			suma = listaPersonajes[i].getVidaActual();
+		}
+		
+		media = suma / cantidadPersonajes;
+		
+		return media;
 	}
 
 

@@ -1,8 +1,8 @@
+import LordOfTheRings.AtaqueSimple;
+import LordOfTheRings.AtaqueVoraz;
 import LordOfTheRings.ProblemaAtaque;
 import LordOfTheRings.ProblemaAtaqueVariable;
 import LordOfTheRings.Temporizador;
-import LordOfTheRings.alternativa.AtaqueSimple;
-import LordOfTheRings.alternativa.AtaqueVoraz;
 
 /**
  * @version 2.0, 04/05/2021

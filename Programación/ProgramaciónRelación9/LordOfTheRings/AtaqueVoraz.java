@@ -1,8 +1,4 @@
-package LordOfTheRings.alternativa;
-
-import LordOfTheRings.EsquemaVZ;
-import LordOfTheRings.EstrategiaSolucion;
-import LordOfTheRings.ProblemaAtaque;
+package LordOfTheRings;
 
 /**
  * @version 2.0, 04/05/2021

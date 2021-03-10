@@ -1,8 +1,4 @@
-package LordOfTheRings.alternativa;
-
-import LordOfTheRings.EsquemaVZ;
-import LordOfTheRings.EstrategiaSolucion;
-import LordOfTheRings.ProblemaAtaque;
+package LordOfTheRings;
 
 public class AtaqueSimple extends EsquemaVZ implements EstrategiaSolucion {
 
