@@ -2,7 +2,7 @@ package JuegoRol;
 
 import java.util.Arrays;
 
-public class ListaPersonajes implements CreableEstadisticas{
+public class ListaPersonajes implements CreableEstadisticas {
 
 	private Personaje listaPersonajes[];
 	private int cantidadPersonajes;
