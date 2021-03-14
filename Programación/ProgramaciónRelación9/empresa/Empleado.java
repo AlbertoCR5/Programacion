@@ -1,4 +1,4 @@
-package Empresa;
+package empresa;
 
 public abstract class Empleado implements ActualizableSueldo {
 
@@ -12,7 +12,7 @@ public abstract class Empleado implements ActualizableSueldo {
 	// Atributos de Empleado
 	private String dni;
 	private String nombre;
-	protected int sueldo;
+	protected int sueldo; 
 
 	public Empleado(String dni, String nombre, int sueldo) throws EmpresaException {
 		setDni(dni);
@@ -52,6 +52,11 @@ public abstract class Empleado implements ActualizableSueldo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public boolean equals (Empleado otro) {
+		
+		return this.dni.equals(otro.dni);
 	}
 
 	@Override

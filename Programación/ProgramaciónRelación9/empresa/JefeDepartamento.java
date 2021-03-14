@@ -1,4 +1,4 @@
-package Empresa;
+package empresa;
 
 public class JefeDepartamento extends Empleado {
 
@@ -9,18 +9,24 @@ public class JefeDepartamento extends Empleado {
 	private static final int CANTIDAD_BAJA_SUBORDINADOS = 3;
 	private static final int MINIMO_SUELDO_JEFE = 1350;
 	private static final int LIMITE_SUBORDINADOS = 12;
+
 	private String departamento;
-	private Empleado[] arraySubordinados = new Empleado[LIMITE_SUBORDINADOS];
+	private Empleado[] subordinados = new Empleado[LIMITE_SUBORDINADOS];
 	private int numeroRealSubordinados;
 
 	public JefeDepartamento(String dni, String nombre, int sueldo, String departamento) throws EmpresaException {
 		super(dni, nombre, sueldo);
 		this.departamento = departamento;
+		subordinados = new Empleado[LIMITE_SUBORDINADOS];
 
 	}
 
 	public String getDepartamento() {
 		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
 	}
 
 	protected void setSueldo(int sueldo) throws EmpresaException {
@@ -31,35 +37,67 @@ public class JefeDepartamento extends Empleado {
 
 		super.setSueldo(sueldo);
 	}
-	
+
+	//Aprenderlo
 	public void incorporarSubordinado(Empleado subordinado) throws EmpresaException {
-		
+
 		if (numeroRealSubordinados == LIMITE_SUBORDINADOS) {
-			throw new EmpresaException("Erro, no puedes incorporar mas subordinados");
+			throw new EmpresaException("Error, no puedes incorporar mas subordinados");
 		}
-		
-		if (super.getSueldo() < subordinado.getSueldo() ) {
+
+		if (this.getSueldo() < subordinado.getSueldo()) {
 			throw new EmpresaException("Error, un empleado base no puede cobrar mas que un jefe");
 		}
-		arraySubordinados[numeroRealSubordinados] = subordinado;			
-		numeroRealSubordinados++;		
-	
+
+		int posicion = buscarHueco();
+		if (posicion == -1) {
+			throw new EmpresaException("Error, no puedes incorporar mas subordinados");
+		}
+
+		subordinados[posicion] = subordinado;
+		numeroRealSubordinados++;
+
 	}
 
-	public Empleado[] getArraySubordinados() {
-		return arraySubordinados;
+	//Aprenderlo
+	public void bajaSubordinado(Empleado subordinado) throws EmpresaException {
+
+		boolean subordinadoEncontrado = false;
+
+		for (int i = 0; i < subordinados.length && !subordinadoEncontrado; i++) {
+
+			if (subordinados[i] != null && subordinados[i].equals(subordinado)) {
+				subordinadoEncontrado = true;
+				subordinados[i] = null;
+				numeroRealSubordinados--;
+			}
+
+		}
+		
+		if (!subordinadoEncontrado) { //(subordinado = false;
+			throw new EmpresaException("Error, no se ha podido dar de baja al subordinado " + subordinado.getNombre());			
+		}
 	}
 
-	public int getNumeroRealSubordinados() {
-		return numeroRealSubordinados;
-	}
+	// Aprenderlo
+	private int buscarHueco() {
 
-	public void setArraySubordinados(Empleado[] arraySubordinados) {
-		this.arraySubordinados = arraySubordinados;
+		boolean encontrado = false;
+		int posicionHueco = -1;
+
+		for (int i = 0; i < subordinados.length && !encontrado; i++) {
+
+			if (subordinados[i] == null) {
+				posicionHueco = i;
+				encontrado = true;
+			}
+
+		}
+		return posicionHueco;
 	}
 
 	@Override
-	public void actualizarSueldo() throws EmpresaException {
+	public void actualizarSueldo() throws EmpresaException { // No se va a dar el error
 
 		int sueldoFinal = 0;
 

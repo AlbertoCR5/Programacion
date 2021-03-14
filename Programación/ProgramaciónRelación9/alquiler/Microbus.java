@@ -1,4 +1,4 @@
-package Alquiler;
+package alquiler;
 
 public class Microbus extends Vehiculo {
 

@@ -1,4 +1,4 @@
-package Alquiler;
+package alquiler;
 
 @SuppressWarnings("serial")
 public class AlquilerException extends Exception {

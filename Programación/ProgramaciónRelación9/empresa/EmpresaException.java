@@ -1,4 +1,4 @@
-package Empresa;
+package empresa;
 
 @SuppressWarnings("serial")
 public class EmpresaException extends Exception {

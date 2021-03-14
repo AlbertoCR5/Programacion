@@ -1,4 +1,4 @@
-package Empresa;
+package empresa;
 
 public class EmpleadoBase extends Empleado{
 

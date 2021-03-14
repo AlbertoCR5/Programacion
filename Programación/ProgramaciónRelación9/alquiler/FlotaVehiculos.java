@@ -1,8 +1,8 @@
-package Alquiler;
+package alquiler;
 
 public class FlotaVehiculos {
 	
-	private Vehiculo vehiculos[];
+	private Vehiculo vehiculos[];//
 
 	/**
 	 *  Variable que guarda donde se insertará el siguiente vehiculo

@@ -1,4 +1,4 @@
-package Empresa;
+package empresa;
 
 public interface ActualizableSueldo {
 	

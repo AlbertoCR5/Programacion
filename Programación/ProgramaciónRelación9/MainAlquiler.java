@@ -1,15 +1,15 @@
-
-
 import java.util.Random;
 import java.util.Scanner;
 
-import Alquiler.AlquilerException;
-import Alquiler.Furgoneta;
-import Alquiler.Microbus;
-import Alquiler.TipoCombustion;
-import Alquiler.TipoGama;
-import Alquiler.Turismo;
-import Alquiler.Vehiculo;
+import alquiler.AlquilerException;
+import alquiler.Furgoneta;
+import alquiler.Microbus;
+import alquiler.TipoCombustion;
+import alquiler.TipoGama;
+import alquiler.Turismo;
+import alquiler.Vehiculo;
+
+
 
 public class MainAlquiler {
 
