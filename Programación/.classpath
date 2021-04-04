@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="ProgramaciónRelación4"/>
 	<classpathentry kind="src" path="ProgramaciónRelación8"/>
 	<classpathentry kind="src" path="ProgramaciónRelación9"/>
+	<classpathentry kind="src" path="ProgramaciónRelación10"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
